@@ -21,27 +21,30 @@
       var camera = new Camera({
         position: [
            -71.060217,
-          42.322655,
-          4000// elevation in meters
+          42.344655,
+          1700// elevation in meters
         ],
         tilt:45,
         heading: 0
       })
       
       var camera2 = new Camera({
-        position: {
-          x: 116.4074,
-          y: 39.9042,
-          z: 5000000
-        },
-        tilt: 0,
+        position: [
+           -71.040217,
+          42.3284655,
+          1850// elevation in meters
+        ],
+        tilt: 45,
         heading: 0
+        
+        
       });
 
       var view = new SceneView({
         container: "viewDiv",
         map: scene,
-        viewingMode:"global",
+        viewingMode:"local",
+        // Geographic coordinate systems are not supported for a Scene Layer in local scenes.
         camera: camera,
         environment: {
             lighting: {
@@ -54,29 +57,42 @@
         },
     });
     
-    /*var homeBtn = new Home({
+    var homeBtn = new Home({
         view: view
-      });*/
+      });
 
       // Add the home button to the top left corner of the view
     view.ui.add(homeBtn, "top-left");
     
-    [stl, bei].forEach(function(button) {
+    [v1, v2, v3].forEach(function(button) {
       button.style.display = 'flex';
       view.ui.add(button, 'top-right');
     });
     
-    bei.addEventListener('click', function() {
+    v2.addEventListener('click', function() {
       // reuse the default camera position already established in the homeBtn
       view.goTo({
         target:camera2
       });
     });
     
-    stl.addEventListener('click', function() {
+    v1.addEventListener('click', function() {
       // reuse the default camera position already established in the homeBtn
       view.goTo({
         target:camera
+      });
+    });
+      
+   v3.addEventListener('click', function() {
+      // reuse the default camera position already established in the homeBtn
+      view.goTo({
+        position: [
+           -70.947903,
+          42.361208,
+          2500// elevation in meters
+        ],
+        tilt: 70,
+        heading: -85
       });
     });
 
